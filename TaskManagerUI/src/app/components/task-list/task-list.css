@@ -1,0 +1,142 @@
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.btn-add {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.form-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form-card input,
+.form-card textarea,
+.form-card select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.form-card textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+.btn-save {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.task-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.task-header span {
+  font-size: 16px;
+  font-weight: 500;
+  flex: 1;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.priority {
+  font-size: 12px !important;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 400 !important;
+}
+
+.high {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.medium {
+  background: #fff8e1;
+  color: #f57f17;
+}
+
+.low {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.description {
+  color: #666;
+  font-size: 14px;
+  margin: 0 0 12px 0;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit {
+  background: #FF9800;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.no-tasks {
+  text-align: center;
+  color: #999;
+  font-size: 16px;
+  margin-top: 40px;
+}
