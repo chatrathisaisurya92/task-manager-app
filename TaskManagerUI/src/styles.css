@@ -1,1 +1,69 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background: #f4f6f8;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Title */
+h1 {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Cards */
+.task-card, .form-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+/* Inputs */
+input, textarea, select {
+  border: 1px solid #d1d5db !important;
+  border-radius: 6px !important;
+  padding: 10px;
+}
+
+/* Buttons */
+button {
+  border-radius: 6px !important;
+  text-transform: none !important;
+  font-weight: 500;
+}
+
+/* Priority badges (subtle, not loud) */
+.priority {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Corporate colors */
+.high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* Task text */
+.description {
+  color: #6b7280;
+}

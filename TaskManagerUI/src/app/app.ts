@@ -7,6 +7,4 @@ import { TaskListComponent } from './components/task-list/task-list';
   imports: [TaskListComponent],
   template: `<app-task-list></app-task-list>`
 })
-export class AppComponent {
-  title = 'TaskManagerUI';
-}
+export class AppComponent {}

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TaskManagerAPI.Models
 {
     public class TaskItem
@@ -8,5 +10,11 @@ namespace TaskManagerAPI.Models
         public bool IsCompleted { get; set; } = false;
         public string Priority { get; set; } = "Medium";
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public int AssignedTo { get; set; }
+        public DateTime? Deadline { get; set; }
+
+        [ForeignKey("AssignedTo")]
+        public User? AssignedUser { get; set; }   // ✅ FIXED
     }
 }

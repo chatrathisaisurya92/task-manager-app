@@ -5,4 +5,12 @@ export interface Task {
   isCompleted: boolean;
   priority: string;
   createdAt: string;
+  assignedTo: number;
+  deadline: string;
+
+  assignedUser?: {   // ✅ make it OPTIONAL
+    id: number;
+    username: string;
+    role: string;
+  };
 }

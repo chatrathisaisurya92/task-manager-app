@@ -3,32 +3,45 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task';
 import { Task } from '../../models/task';
-
+import { MatButtonModule } from '@angular/material/button';
+import { UserService, User } from '../../services/user.service';
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,MatButtonModule],
   templateUrl: './task-list.html',
-styleUrl: './task-list.css'
+  styleUrls: ['./task-list.css']
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
+  users: User[] = [];
   showForm = false;
   editMode = false;
 
   newTask: Task = {
+  id: 0,
+  title: '',
+  description: '',
+  isCompleted: false,
+  priority: 'Medium',
+  createdAt: new Date().toISOString(),
+  assignedTo: 0,         // ✅ ADD
+  deadline: '',          // ✅ ADD
+  assignedUser: {        // ✅ ADD
     id: 0,
-    title: '',
-    description: '',
-    isCompleted: false,
-    priority: 'Medium',
-    createdAt: new Date().toISOString()
-  };
+    username: '',
+    role: ''
+  }
+};
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.loadTasks();
+    this.loadUsers();
   }
 
   loadTasks(): void {
@@ -36,7 +49,11 @@ export class TaskListComponent implements OnInit {
       this.tasks = tasks;
     });
   }
-
+loadUsers(): void {
+  this.userService.getUsers().subscribe(data => {
+    this.users = data;
+  });
+}
   saveTask(): void {
     if (this.editMode) {
       this.taskService.updateTask(this.newTask.id, this.newTask).subscribe(() => {
@@ -68,16 +85,23 @@ export class TaskListComponent implements OnInit {
     this.taskService.updateTask(task.id, task).subscribe();
   }
 
-  resetForm(): void {
-    this.newTask = {
+ resetForm(): void {
+  this.newTask = {
+    id: 0,
+    title: '',
+    description: '',
+    isCompleted: false,
+    priority: 'Medium',
+    createdAt: new Date().toISOString(),
+    assignedTo: 0,
+    deadline: '',
+    assignedUser: {
       id: 0,
-      title: '',
-      description: '',
-      isCompleted: false,
-      priority: 'Medium',
-      createdAt: ''
-    };
-    this.showForm = false;
-    this.editMode = false;
-  }
+      username: '',
+      role: ''
+    }
+  };
+  this.showForm = false;
+  this.editMode = false;
+}
 }
