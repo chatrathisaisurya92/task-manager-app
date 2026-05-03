@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <div class="nav-left">
+  <div class="brand" style="overflow: hidden; align-items: center; display: flex; gap: 10px;">
+  <img src="assets/logo.png" alt="TaskMonitor Logo" class="brand-logo" />
+  <span class="brand-name">TaskMonitor</span>
+</div>
+
+   
+  </div>
+
+  <div class="nav-right">
+
+    <!-- Avatar + Dropdown only -->
+    <div class="avatar-wrapper" (click)="toggleDropdown()">
+      <div class="avatar-btn">
+        <div class="avatar">{{ getInitials() }}</div>
+        <span class="avatar-name">{{ getUsername() }}</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+
+      <div class="dropdown" *ngIf="showDropdown" (click)="$event.stopPropagation()">
+        <div class="dropdown-header">
+          <div class="dd-avatar">{{ getInitials() }}</div>
+          <div class="dd-name">{{ getUsername() }}</div>
+        </div>
+        <div class="dropdown-footer">
+          <button class="logout-btn" (click)="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
