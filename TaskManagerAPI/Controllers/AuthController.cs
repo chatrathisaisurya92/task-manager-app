@@ -1,5 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using TaskManagerAPI.Data;
 using TaskManagerAPI.Models;
 
@@ -10,10 +14,12 @@ namespace TaskManagerAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(AppDbContext context)
+        public AuthController(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpPost("login")]
@@ -27,9 +33,35 @@ namespace TaskManagerAPI.Controllers
             if (user == null)
                 return Unauthorized("Invalid username or password");
 
-            // Return minimal info (no password ideally)
+            // 🔐 Get JWT settings from appsettings.json
+            var jwtSettings = _configuration.GetSection("Jwt");
+            var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]!);
+
+            // 🎯 Claims (what goes inside token)
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, user.Role)
+            };
+
+            // 🎟 Create Token
+            var token = new JwtSecurityToken(
+                issuer: jwtSettings["Issuer"],
+                audience: jwtSettings["Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(jwtSettings["ExpiryMinutes"])),
+                signingCredentials: new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256
+                )
+            );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+            // ✅ Return token + user info
             return Ok(new
             {
+                token = tokenString,
                 user.Id,
                 user.Username,
                 user.Role

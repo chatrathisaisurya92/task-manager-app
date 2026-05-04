@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<app-navbar *ngIf="showNavbar"></app-navbar>
+<div [style.padding-top]="showNavbar ? '60px' : '0px'">
+  <router-outlet></router-outlet>
+</div>

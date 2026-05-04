@@ -15,7 +15,7 @@ html, body {
 body {
   margin: 0;
   padding: 0;
-  padding-top: 60px;      /* ← pushes all page content below the fixed navbar */
+  /* ❌ REMOVED padding-top: 60px — this was causing the white bar on login */
   background: #f4f6f8;
   font-family: 'Segoe UI', sans-serif;
   overflow-x: hidden;
@@ -24,7 +24,7 @@ body {
 /* ── Container ── */
 .container {
   max-width: 800px;
-  margin: 0 auto;          /* removed top 40px — use padding-top on wrapper instead */
+  margin: 0 auto;
   padding: 24px 20px;
 }
 

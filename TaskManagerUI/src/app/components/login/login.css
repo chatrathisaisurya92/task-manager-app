@@ -1,4 +1,11 @@
 /* ===== RESET ===== */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
 * {
   box-sizing: border-box;
   margin: 0;

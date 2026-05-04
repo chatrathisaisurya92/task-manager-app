@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;   // ✅ ADD THIS
 using TaskManagerAPI.Data;
 using TaskManagerAPI.Models;
 
 namespace TaskManagerAPI.Controllers
 {
+    [Authorize]    
     [ApiController]
     [Route("api/[controller]")]
     public class TasksController : ControllerBase

@@ -1,24 +1,37 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar';
+import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, NavbarComponent],
+  imports: [RouterOutlet, NavbarComponent, CommonModule],
   template: `
-    <!-- Navbar only after login -->
-    <app-navbar *ngIf="isLoggedIn()"></app-navbar>
-
-    <!-- Page Content -->
-    <router-outlet></router-outlet>
+    <app-navbar *ngIf="showNavbar"></app-navbar>
+    <div [style.padding-top]="showNavbar ? '60px' : '0px'">
+      <router-outlet></router-outlet>
+    </div>
   `
 })
 export class AppComponent {
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('user');
-  }
+  showNavbar = false;
 
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+
+        const url = event.urlAfterRedirects;
+
+        // ❌ Hide navbar on login
+        if (url === '/' || url === '/login') {
+          this.showNavbar = false;
+        } else {
+          this.showNavbar = true;
+        }
+      });
+  }
 }

@@ -41,7 +41,8 @@ export class LoginComponent {
         };
 
         // ✅ Always store in localStorage (fixes guard + navbar)
-        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('token', res.token); 
+        localStorage.setItem('user', JSON.stringify(res));
 
         // 🚀 Navigation
         if (res.role === 'Admin') {
